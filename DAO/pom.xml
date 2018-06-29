@@ -59,14 +59,14 @@
 
 	<repositories>
 		<repository>
-			<id>spring-releases</id>
+			<eliotId>spring-releases</eliotId>
 			<name>Spring Releases</name>
 			<url>https://repo.spring.io/libs-release</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>spring-releases</id>
+			<eliotId>spring-releases</eliotId>
 			<name>Spring Releases</name>
 			<url>https://repo.spring.io/libs-release</url>
 		</pluginRepository>

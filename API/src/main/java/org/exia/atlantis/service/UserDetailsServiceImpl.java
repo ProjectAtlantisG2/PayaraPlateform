@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.ws.rs.core.Application;
 import java.util.Optional;
 
 import static java.util.Collections.emptyList;
@@ -26,11 +25,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        Optional<ApplicationUser> result = applicationUserRepository.findById(id);
+        Optional<ApplicationUser> result = applicationUserRepository.findByEliotId(id);
         if (!result.isPresent()) {
             throw new UsernameNotFoundException(id);
         }
         ApplicationUser applicationUser = result.get();
-        return new User(applicationUser.getId(), applicationUser.getEliotChain(), emptyList());
+        return new User(applicationUser.getEliotId(), applicationUser.getEliotChain(), emptyList());
     }
 }

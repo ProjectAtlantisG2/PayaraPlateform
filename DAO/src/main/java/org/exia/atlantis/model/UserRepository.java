@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface UserRepository extends MongoRepository<ApplicationUser, String> {
 
     public Optional<ApplicationUser> findById(String id);
+    public Optional<ApplicationUser> findByEliotId(String eliotId);
+    public Optional<ApplicationUser> findByEliotChain(String eliotChain);
 
 }

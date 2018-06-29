@@ -42,7 +42,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            creds.getId(),
+                            creds.getEliotId(),
                             creds.getEliotChain(),
                             new ArrayList<>())
             );

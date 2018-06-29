@@ -2,11 +2,12 @@ package org.exia.atlantis.controller.mobileendpoint;
 
 import org.exia.atlantis.model.Device;
 import org.exia.atlantis.model.DeviceRepository;
+import org.exia.atlantis.model.MetricMonth;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -24,8 +25,9 @@ public class DeviceRestController {
     }
 
     @GetMapping("/{deviceID}")
-    Device readDevice(@PathVariable String deviceID) {
-        return this.deviceRepository.findById(deviceID).get();
+    HttpEntity<Device> readDevice(@PathVariable (required = true) String deviceID) {
+        Device device = this.deviceRepository.findById(deviceID).get();
+        return new ResponseEntity<Device>(device, HttpStatus.OK);
     }
 
     @GetMapping
