@@ -1,4 +1,4 @@
-package org.exia.atlantis.mobileendpoint;
+package org.exia.atlantis.controller.mobileendpoint;
 
 import org.exia.atlantis.model.Device;
 import org.exia.atlantis.model.DeviceRepository;
