@@ -12,6 +12,14 @@ public class MetricMonth {
     public List<MetricDays> days;
 
     public MetricMonth(){
+
+    }
+    public MetricMonth(String month){
+        this.month = month;
+        this.days = new ArrayList<MetricDays>();
+    }
+
+    public void fake(){
         Random rand = new Random();
         this.month = "lorem";
         this.days = new ArrayList<>();

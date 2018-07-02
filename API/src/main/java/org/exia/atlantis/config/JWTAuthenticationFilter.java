@@ -3,6 +3,7 @@ package org.exia.atlantis.config;
 /**
  * Created by Azerom on 29/06/2018.
  */
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -22,10 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static org.exia.atlantis.config.SecurityConstants.EXPIRATION_TIME;
-import static org.exia.atlantis.config.SecurityConstants.HEADER_STRING;
-import static org.exia.atlantis.config.SecurityConstants.SECRET;
-import static org.exia.atlantis.config.SecurityConstants.TOKEN_PREFIX;
+import static org.exia.atlantis.config.SecurityConstants.*;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
 

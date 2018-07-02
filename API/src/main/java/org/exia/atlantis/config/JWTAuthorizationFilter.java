@@ -3,6 +3,7 @@ package org.exia.atlantis.config;
 /**
  * Created by Azerom on 29/06/2018.
  */
+
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,9 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.exia.atlantis.config.SecurityConstants.HEADER_STRING;
-import static org.exia.atlantis.config.SecurityConstants.SECRET;
-import static org.exia.atlantis.config.SecurityConstants.TOKEN_PREFIX;
+import static org.exia.atlantis.config.SecurityConstants.*;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 

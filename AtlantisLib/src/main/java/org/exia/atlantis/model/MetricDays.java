@@ -16,12 +16,17 @@ public class MetricDays{
 
     }
 
+    public MetricDays(int dayNumber){
+        this.dayNumber = dayNumber;
+        this.points = new ArrayList<Object>();
+    }
+
     public void fake(){
         Random rand = new Random();
         this.dayNumber = rand.nextInt(30) + 1;
         this.points = new ArrayList<>();
-        for(int i = 0; i < 15; i++){
-            this.points.add(i);
+        for(int i = 0; i < 1500; i++){
+            this.points.add(rand.nextInt(10) + 30);
         }
     }
 }
