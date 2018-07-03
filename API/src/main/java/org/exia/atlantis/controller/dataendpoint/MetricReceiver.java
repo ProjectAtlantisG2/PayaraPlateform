@@ -15,6 +15,8 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 
@@ -30,9 +32,13 @@ public class MetricReceiver {
         ObjectMapper mapper = new ObjectMapper();
 
         final Metric metric =  mapper.readValue(message, Metric.class);
+        UUID uuid = UUID.fromString("e84bff53-3ceb-0274-d643-692bf1283aa9");
+        Device device = deviceRepository.findByDeviceid(uuid);
 
 
-        deviceRepository.findById(metric.deviceId).ifPresent( m -> { m.addMetric(metric); deviceRepository.save(m); });
+            device.addMetric(metric);
+            deviceRepository.save(device);
+
 
         } catch (IOException e) {
             e.printStackTrace();

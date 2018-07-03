@@ -42,21 +42,21 @@ public class CalculatedMetricRestController {
         return new ResponseEntity<CalculatedMetric>(metric, HttpStatus.OK);
     }
 
-    @GetMapping("/test")
-    HttpEntity<Object> testJMS(){
-        ObjectMapper mapper = new ObjectMapper();
-        Metric metric = new Metric();
-        metric.fake("5b3b704b41a52b2580679243");
-        String json = null;
-        try {
-            json = mapper.writeValueAsString(metric);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        rabbitTemplate.convertAndSend("MetricsExchange", "metrics",json);
-
-        return  new ResponseEntity<Object>( json, HttpStatus.OK);
-    }
+//    @GetMapping("/test")
+//    HttpEntity<Object> testJMS(){
+//        ObjectMapper mapper = new ObjectMapper();
+//        Metric metric = new Metric();
+//        metric.fake("5b3b704b41a52b2580679243");
+//        String json = null;
+//        try {
+//            json = mapper.writeValueAsString(metric);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//        rabbitTemplate.convertAndSend("CommandsExchange", "commands",json);
+//
+//        return  new ResponseEntity<Object>( json, HttpStatus.OK);
+//    }
 
 
 

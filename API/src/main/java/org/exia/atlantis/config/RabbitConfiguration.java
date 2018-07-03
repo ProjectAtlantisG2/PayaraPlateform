@@ -22,21 +22,6 @@ public class RabbitConfiguration {
 
     static final String metricsQueue = "Metrics";
 
-//    @Bean
-//    public ConnectionFactory connectionFactory() {
-//        return new CachingConnectionFactory("192.168.0.29");
-//    }
-//
-//    @Bean
-//    public AmqpAdmin amqpAdmin() {
-//        return new RabbitAdmin(connectionFactory());
-//    }
-//
-//    @Bean
-//    public RabbitTemplate rabbitTemplate() {
-//        return new RabbitTemplate(connectionFactory());
-//    }
-
     @Bean
     Queue queue() {
         return new Queue(metricsQueue, false);

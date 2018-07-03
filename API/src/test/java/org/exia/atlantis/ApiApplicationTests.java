@@ -35,21 +35,13 @@ public class ApiApplicationTests {
 			return new MongoTemplate(new MongoClient("localhost"), "test");
 		}
 
-		@Bean
-		public MetricReceiver metricReceiver() throws Exception {
-			return new MetricReceiver();
-		}
 
 	}
 
 	@Autowired
 	private DeviceRepository repository;
 
-	@Autowired
-	private MetricReceiver metricReceiver;
 
-	@Autowired
-	private JmsTemplate jmsTemplate;
 
 	@Test
 	public void contextLoads() {
@@ -86,16 +78,5 @@ public class ApiApplicationTests {
 //		assertEquals(value, metric.metricValue);
 //	}
 
-	@Test
-	public void JMSTest(){
-
-		Metric metric = new Metric();
-		metric.fake("5b3a19c8ae35f1091045f993");
-
-
-		// Send a message with a POJO - the template reuse the message converter
-		System.out.println("Sending an email message.");
-		jmsTemplate.convertAndSend(metric);
-	}
 
 }

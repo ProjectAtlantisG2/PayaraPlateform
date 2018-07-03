@@ -19,6 +19,7 @@ public class ApplicationUser {
     private String eliotId;
 
     private String firstName;
+
     private String lastName;
 
     private String eliotChain;

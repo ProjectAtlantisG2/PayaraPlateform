@@ -25,7 +25,7 @@ public class Metric {
     public Metric(JSONObject json){
         try {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/LL/yyyy HH:mm:ss:", Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/LL/yyyy HH:mm:ss:SSS", Locale.ENGLISH);
 
         this.deviceId = json.getString("deviceId");
         this.deviceType = json.getString("deviceType");

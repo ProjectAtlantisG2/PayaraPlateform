@@ -23,7 +23,7 @@ public class MetricMonth {
         Random rand = new Random();
         this.month = "lorem";
         this.days = new ArrayList<>();
-        for (int i = 1; i < 31; i++){
+        for (int i = 1; i < 7; i++){
             MetricDays md = new MetricDays();
             md.fake(i);
             days.add(md);

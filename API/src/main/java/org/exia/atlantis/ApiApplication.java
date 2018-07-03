@@ -31,7 +31,7 @@ public class ApiApplication extends SpringBootServletInitializer {
 
 	static final String metricTopicExchange = "MetricsExchange";
 
-	static final String metricsQueue = "Metrics";
+	static final String metricsQueue = "Commands";
 
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -53,7 +53,6 @@ public class ApiApplication extends SpringBootServletInitializer {
 	@Bean
 	SimpleMessageListenerContainer metricContainer(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter){
 		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-
 		container.setConnectionFactory(connectionFactory);
 		container.setQueueNames(metricsQueue);
 		container.setMessageListener(listenerAdapter);

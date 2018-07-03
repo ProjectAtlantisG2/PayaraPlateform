@@ -15,7 +15,7 @@ import java.util.UUID;
 public interface DeviceRepository extends MongoRepository<Device, String> {
 
     public Device findByMacAddress(String mac_address);
-    public List<Device> findByUsers(ObjectId user);
-    public Optional<Device> findByUuid(UUID uuid);
+    public List<Device> findByIdEmployee(ObjectId idEmployee);
+    public Device findByDeviceid(UUID deviceid);
 
 }

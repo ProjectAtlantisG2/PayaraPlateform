@@ -34,14 +34,20 @@ public class DeviceRestController {
 
     @GetMapping("/{uuid}")
     HttpEntity<Device> readDevice(@PathVariable (required = true) String uuid) {
-        Device device = this.deviceRepository.findByUuid(UUID.fromString(uuid)).orElse(null);
+        Device device = this.deviceRepository.findById(uuid).orElse(null);
+        return new ResponseEntity<Device>(device, HttpStatus.OK);
+    }
+
+    @GetMapping("/uuid/{uuid}")
+    HttpEntity<Device> readDeviceFromUUID(@PathVariable (required = true) String uuid) {
+        Device device = this.deviceRepository.findByDeviceid(UUID.fromString(uuid));
         return new ResponseEntity<Device>(device, HttpStatus.OK);
     }
 
     @GetMapping
     HttpEntity<List<Device>> getAllUserDevice(@RequestHeader("Authorization") String authorization, Principal principal){
         ApplicationUser user = userRepository.findByEliotId(principal.getName()).orElse(null);
-        List<Device> devices = deviceRepository.findByUsers(new ObjectId(user.getId()));
+        List<Device> devices = deviceRepository.findByIdEmployee(new ObjectId(user.getId()));
         return new ResponseEntity<List<Device>>(devices, HttpStatus.OK);
     }
 
@@ -51,7 +57,7 @@ public class DeviceRestController {
         ApplicationUser user = userRepository.findByEliotId(principal.getName()).orElse(null);
 
         dev.fake();
-        dev.users.add(new ObjectId(user.getId()));
+        dev.idEmployee = new ObjectId(user.getId());
         deviceRepository.save(dev);
         return dev;
     }
