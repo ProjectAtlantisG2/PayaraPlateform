@@ -23,9 +23,9 @@ public class MetricMonth {
         Random rand = new Random();
         this.month = "lorem";
         this.days = new ArrayList<>();
-        for (int i = 0; i < 30; i++){
+        for (int i = 1; i < 31; i++){
             MetricDays md = new MetricDays();
-            md.fake();
+            md.fake(i);
             days.add(md);
         }
     }

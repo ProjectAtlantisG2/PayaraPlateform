@@ -6,6 +6,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.hateoas.ResourceSupport;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.*;
 
 /**
@@ -15,6 +17,8 @@ public class Device extends ResourceSupport {
 
     @Id
     public String id;
+
+    public UUID uuid;
 
     public String macAddress;
     public Long elapsedBetweenPoints;
@@ -30,7 +34,7 @@ public class Device extends ResourceSupport {
     @JsonCreator
     public Device(@JsonProperty("macAddress") String macAddress, @JsonProperty("elapsedBetweenPoints") Long elapsedBetweenPoints,
                     @JsonProperty("users") List<ObjectId> users, @JsonProperty("category") String category, @JsonProperty("metric") String metric,
-                    @JsonProperty("data") List<MetricMonth> data) {
+                    @JsonProperty("metricValue") List<MetricMonth> data) {
         this.macAddress = macAddress;
         this.elapsedBetweenPoints = elapsedBetweenPoints;
         this.users = users;
@@ -40,10 +44,10 @@ public class Device extends ResourceSupport {
     }
 
     public void addMetric(Metric metric){
-        String month = Integer.toString(metric.timestamp.get(Calendar.YEAR) - 1900) + Integer.toString(metric.timestamp.get(Calendar.MONTH));
-        int day = metric.timestamp.get(Calendar.DAY_OF_MONTH);
-        int millisecond = metric.timestamp.get(Calendar.MILLISECOND) + metric.timestamp.get(Calendar.SECOND) * 1000 +
-                metric.timestamp.get(Calendar.MINUTE) * 1000 * 60 + metric.timestamp.get(Calendar.HOUR_OF_DAY) * 1000 * 60 * 24;
+        String month = Integer.toString(metric.metricDate.get(Calendar.YEAR) - 1900) + Integer.toString(metric.metricDate.get(Calendar.MONTH));
+        int day = metric.metricDate.get(Calendar.DAY_OF_MONTH);
+        int millisecond = metric.metricDate.get(Calendar.MILLISECOND) + metric.metricDate.get(Calendar.SECOND) * 1000 +
+                metric.metricDate.get(Calendar.MINUTE) * 1000 * 60 + metric.metricDate.get(Calendar.HOUR_OF_DAY) * 1000 * 60 * 24;
 
         int monthIndex = -1;
         int dayIndex = -1;
@@ -73,7 +77,7 @@ public class Device extends ResourceSupport {
             this.data.get(monthIndex).days.get(dayIndex).points.add(null);
         }
         //Add datapoint
-        this.data.get(monthIndex).days.get(dayIndex).points.add(metric.data);
+        this.data.get(monthIndex).days.get(dayIndex).points.add(metric.metricValue);
 
 
 
@@ -81,7 +85,7 @@ public class Device extends ResourceSupport {
 
 
     public Device(){
-
+        this.uuid = UUID.randomUUID();
     }
 
     public void fake(){
@@ -91,7 +95,7 @@ public class Device extends ResourceSupport {
         this.category = "ipsum";
         this.metric = "lorem";
         this.data = new ArrayList<MetricMonth>();
-        for(int i = 0; i < 12; i++){
+        for(int i = 0; i < 2; i++){
             MetricMonth month = new MetricMonth("test");
             month.fake();
             data.add(month);

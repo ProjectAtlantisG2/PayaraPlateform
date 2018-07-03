@@ -6,6 +6,8 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Created by Azerom on 29/06/2018.
@@ -14,5 +16,6 @@ public interface DeviceRepository extends MongoRepository<Device, String> {
 
     public Device findByMacAddress(String mac_address);
     public List<Device> findByUsers(ObjectId user);
+    public Optional<Device> findByUuid(UUID uuid);
 
 }

@@ -1,8 +1,13 @@
 package org.exia.atlantis.controller.mobileendpoint;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.exia.atlantis.config.WebSecurity;
+import org.exia.atlantis.controller.dataendpoint.MetricReceiver;
 import org.exia.atlantis.model.CalculatedMetric;
 import org.exia.atlantis.model.Metric;
+import org.json.JSONObject;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -13,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Azerom on 30/06/2018.
  */
@@ -20,11 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/calculatedMetric")
 public class CalculatedMetricRestController {
 
-    @Autowired
-    WebSecurity webSecurity;
+    private final RabbitTemplate rabbitTemplate;
 
-    @Autowired
-    JmsTemplate jmsTemplate;
+    private final MetricReceiver receiver;
+
+    public CalculatedMetricRestController (MetricReceiver receiver, RabbitTemplate rabbitTemplate) {
+        this.receiver = receiver;
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
     @GetMapping("/{metricID}")
     HttpEntity<CalculatedMetric> readCalculatedMetric(@PathVariable(required = true) String metricID) {
@@ -34,10 +44,18 @@ public class CalculatedMetricRestController {
 
     @GetMapping("/test")
     HttpEntity<Object> testJMS(){
+        ObjectMapper mapper = new ObjectMapper();
         Metric metric = new Metric();
-        metric.fake("5b3a19c8ae35f1091045f993");
-        jmsTemplate.convertAndSend("mailbox", metric);
-        return  new ResponseEntity<Object>(42, HttpStatus.OK);
+        metric.fake("5b3b704b41a52b2580679243");
+        String json = null;
+        try {
+            json = mapper.writeValueAsString(metric);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        rabbitTemplate.convertAndSend("MetricsExchange", "metrics",json);
+
+        return  new ResponseEntity<Object>( json, HttpStatus.OK);
     }
 
 

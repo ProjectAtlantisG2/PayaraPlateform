@@ -2,6 +2,10 @@ package org.exia.atlantis.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import java.util.UUID;
+
 /**
  * Created by Azerom on 29/06/2018.
  */
@@ -10,12 +14,18 @@ public class ApplicationUser {
     @Id
     private String id;
 
+    private UUID uuid;
+
     private String eliotId;
 
     private String firstName;
     private String lastName;
 
     private String eliotChain;
+
+    public ApplicationUser(){
+        this.uuid = UUID.randomUUID();
+    }
 
     public String getId() {
         return id;
@@ -25,6 +35,9 @@ public class ApplicationUser {
         this.id = id;
     }
 
+    public UUID getUuid() { return uuid; }
+
+    public void setUuid(UUID uuid) { this.uuid = uuid; }
 
     public String getEliotId() {
         return eliotId;
@@ -57,4 +70,6 @@ public class ApplicationUser {
     public void setEliotChain(String eliotChain) {
         this.eliotChain = eliotChain;
     }
+
+
 }

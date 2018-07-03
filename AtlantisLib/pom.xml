@@ -60,17 +60,27 @@
 			<artifactId>spring-hateoas</artifactId>
 			<version>0.24.0.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180130</version>
+		</dependency>
+		<dependency>
+			<groupId>com.airhacks</groupId>
+			<artifactId>jaxrs-cors</artifactId>
+			<version>0.0.2</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
-			<eliotId>spring-releases</eliotId>
+			<id>spring-releases</id>
 			<name>Spring Releases</name>
 			<url>https://repo.spring.io/libs-release</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<eliotId>spring-releases</eliotId>
+			<id>spring-releases</id>
 			<name>Spring Releases</name>
 			<url>https://repo.spring.io/libs-release</url>
 		</pluginRepository>

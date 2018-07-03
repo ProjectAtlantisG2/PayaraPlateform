@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -31,9 +32,9 @@ public class DeviceRestController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/{deviceID}")
-    HttpEntity<Device> readDevice(@PathVariable (required = true) String deviceID) {
-        Device device = this.deviceRepository.findById(deviceID).orElse(null);
+    @GetMapping("/{uuid}")
+    HttpEntity<Device> readDevice(@PathVariable (required = true) String uuid) {
+        Device device = this.deviceRepository.findByUuid(UUID.fromString(uuid)).orElse(null);
         return new ResponseEntity<Device>(device, HttpStatus.OK);
     }
 
