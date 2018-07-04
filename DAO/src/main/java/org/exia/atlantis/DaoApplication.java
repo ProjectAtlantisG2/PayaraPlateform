@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication
-public class DaoApplication extends SpringBootServletInitializer {
-
-	public static void main(String[] args) {
-		SpringApplication.run(applicationClass, args);
-	}
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(applicationClass);
-	}
-
-	private static Class<DaoApplication> applicationClass = DaoApplication.class;
-}
+//@SpringBootApplication
+//public class DaoApplication extends SpringBootServletInitializer {
+//
+//	public static void main(String[] args) {
+//		SpringApplication.run(applicationClass, args);
+//	}
+//
+//	@Override
+//	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//		return application.sources(applicationClass);
+//	}
+//
+//	private static Class<DaoApplication> applicationClass = DaoApplication.class;
+//}
 
 @RestController
 class GreetingController {
